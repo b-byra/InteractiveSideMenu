@@ -141,7 +141,7 @@ extension MenuContainerViewController {
         dismissNavigationMenu(completion: completion)
     }
     public func hideSideMenu() {
-        hideSideMenu()
+        hideSideMenu(completion: nil)
     }
 
     /**
