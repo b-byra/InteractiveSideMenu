@@ -126,16 +126,22 @@ extension MenuContainerViewController {
     /**
      Shows left side menu.
      */
+    public func showSideMenu(completion: (() -> ())?) {
+        presentNavigationMenu(completion: completion)
+    }
     public func showSideMenu() {
-        presentNavigationMenu()
+        showSideMenu(completion: nil)
     }
 
     /**
      Hides left side menu.
      Controller from the right side will be visible.
      */
+    public func hideSideMenu(completion: (() -> ())?) {
+        dismissNavigationMenu(completion: completion)
+    }
     public func hideSideMenu() {
-        dismissNavigationMenu()
+        hideSideMenu()
     }
 
     /**
@@ -173,19 +179,19 @@ fileprivate extension MenuContainerViewController {
     /**
      Presents left side menu.
      */
-    func presentNavigationMenu() {
+    func presentNavigationMenu(completion: (() -> ())? = nil) {
         if menuViewController == nil {
             fatalError("Invalid `menuViewController` value. It should not be nil")
         }
-        present(menuViewController, animated: true, completion: nil)
+        present(menuViewController, animated: true, completion: completion)
         isShown = true
     }
 
     /**
      Dismisses left side menu.
      */
-    func dismissNavigationMenu() {
-        self.dismiss(animated: true, completion: nil)
+    func dismissNavigationMenu(completion: (() -> ())? = nil) {
+        self.dismiss(animated: true, completion: completion)
         isShown = false
     }
 }
