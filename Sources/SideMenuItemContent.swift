@@ -27,7 +27,6 @@ public protocol SideMenuItemContent {
      Shows left side menu.
      */
     func showSideMenu(completion: (() -> ())?)
-    func showSideMenu()
 }
 
 /**
@@ -35,6 +34,10 @@ public protocol SideMenuItemContent {
  */
 extension SideMenuItemContent where Self: UIViewController {
 
+    public func showSideMenu() {
+        showSideMenu(completion: nil)
+    }
+    
     public func showSideMenu(completion: (() -> ())?) {
         if let menuContainerViewController = parent as? MenuContainerViewController {
             menuContainerViewController.showSideMenu(completion: completion)
