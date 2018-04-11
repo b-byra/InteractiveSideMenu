@@ -22,18 +22,19 @@ import UIKit
  The protocol to indicate item of side menu. Every menu item should adopt this protocol.
  */
 public protocol SideMenuItemContent {
-
+    
     /**
      Shows left side menu.
      */
     func showSideMenu(completion: (() -> ())?)
+    
 }
 
 /**
  The extension of SideMenuItemContent protocol implementing `showSideMenu()` method for UIViewController class.
  */
 extension SideMenuItemContent where Self: UIViewController {
-
+    
     public func showSideMenu() {
         showSideMenu(completion: nil)
     }
