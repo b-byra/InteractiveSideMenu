@@ -73,6 +73,17 @@ open class MenuContainerViewController: UIViewController {
      */
     public var contentViewControllers = [UIViewController]()
 
+    private var screenEdgePanRecognizer: UIScreenEdgePanGestureRecognizer?
+
+    public var edgeGesture: Bool = false {
+      didSet {
+        guard let screenEdgePanRecognizer = screenEdgePanRecognizer else { return }
+        guard edgeGesture else { return view.removeGestureRecognizer(screenEdgePanRecognizer) }
+
+        screenEdgePanRecognizer.edges = .left
+        view.addGestureRecognizer(screenEdgePanRecognizer)
+      }
+  }
 
     // MARK: - Controller lifecycle
     //
@@ -90,6 +101,11 @@ open class MenuContainerViewController: UIViewController {
         )
 
         navigationMenuTransitionDelegate = MenuTransitioningDelegate(interactiveTransition: interactiveTransition)
+
+        screenEdgePanRecognizer = UIScreenEdgePanGestureRecognizer(
+            target: navigationMenuTransitionDelegate.interactiveTransition,
+            action: #selector(MenuInteractiveTransition.handlePanPresentation(recognizer:))
+        )
     }
 
     override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
